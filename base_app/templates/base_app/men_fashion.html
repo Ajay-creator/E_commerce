@@ -1,0 +1,20 @@
+{% extends "base_app/base.html" %}
+{% load static %}
+{% block body %}
+
+<head><link rel="stylesheet" type="text/css" href="{%static "css/base_app/categories.css"%}"></head>
+<h3>Mens Fashion</h3>
+<div class="container category">
+	{% for pro in products %}
+		<div class="product">
+		<h4>{{pro.product_name}}</h4>
+
+		<img src="{{pro.image}}"/>
+
+		<span>$ {{pro.price|floatformat:2}} </span>
+		<p>{{ pro.description }}</p>
+		<button data-product={{pro.id}} data-action="add" class="update-cart" id="btn">Add to Cart</button>
+		</div>
+	{% endfor %}
+</div>
+{% endblock %}

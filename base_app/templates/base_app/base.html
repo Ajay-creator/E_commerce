@@ -1,0 +1,215 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style>
+        /*  loader */
+        .loader .container{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            margin-top:50vh;
+        }
+        .circle1{
+            border:10px solid #34ebe8;
+            height:60px;
+            width:60px;
+            border-left-color:transparent;
+            border-right-color:transparent ;
+            border-radius:100%;
+            position:relative;
+            animation:rotate .9s infinite;
+        }
+        .circle2{
+            height:40px;
+            width:40px;
+            border:6px solid #eb348c;
+            border-top-color:transparent;
+            border-bottom-color:transparent;
+            border-radius:100%;
+            position:absolute;
+            animation:rotate .9s infinite reverse;
+        }
+        .circle3{
+            height:25px;
+            width:25px;
+            border:4px solid #f2c64b;
+            border-left-color:transparent;
+            border-right-color:transparent;
+            border-radius:100%;
+            position:absolute;
+            animation:rotate .9s infinite;
+        }
+        @keyframes rotate{
+            0%{transform:rotateZ(0deg);}
+            100%{transform:rotateZ(360deg);}
+        }
+
+    </style>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- AOS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" type="text/css" href="{% static "css/base_app/base.css" %}">
+
+    <script type="text/javascript">
+        var user = '{{request.user}}'
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
+    </script>
+    <title>Origin Products</title>
+
+</head>
+<body>
+
+    <!-- loader -->
+<div class="loader" id="loader">
+    <div class="container">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+    </div>
+</div>
+
+<!-- menu  -->
+<div class="header"><i class="fa fa-bars" id="menu-bar" style="font-size:35px;"></i>
+<span>Origin Products</span>
+    <a href="{% url "my_cart"%}"><i class="fa fa-cart-arrow-down" id="cart"></i></a>
+    <p>{{cartItems}}</p>
+</div>
+
+<div class="menu">
+    <ul>
+        <li>
+        <i id="close"class="fa fa-arrow-circle-left"></i>
+        </li>
+        <strong><li style="color:#fff;margin:20px;font-size:25px;">Hello!   {{request.user.username}}</li></strong>
+        <li><a href="{% url "home" %}">Home</a></li>
+        <li><a href="#">Categories</a></li>
+        <li><a href="#">Offers</a></li>
+        <li><a href="#">Today's  Deal</a></li>
+        <li><a href="#">Best Sellers</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="{% url "logout" %}">Logout</a></li>
+        {% else %}
+        <li><a href="{% url "login" %}">Login</a></li>
+        <li><a href="{% url "signup" %}">Signup</a></li>
+        {% endif %}
+    </ul>
+</div>
+ <script>
+     var menu = document.getElementById("menu-bar")
+        menu.addEventListener("click",function(){
+        document.querySelector(".menu").classList.add("active")
+     })
+    var close = document.getElementById("close")
+        close.addEventListener("click",function(){
+        document.querySelector(".menu").classList .remove("active")
+})
+
+
+    window.addEventListener("scroll",function(){
+        var header = document.querySelector(".header")
+        header.classList.toggle("background",window.scrollY>70)
+    })
+
+ </script>       
+</div>
+
+
+{% block body %}
+<!-- body -->
+{% endblock %}
+
+<!-- footer -->
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <ul>
+                    <li>About</li>
+                    <li>Community Guidlines</li>
+                    <li>Privacy & Terms</li>
+                    <li>Sales Solutions</li>
+                    <li>Safety Centers</li>
+                    <li>Ware Houses</li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <ul>
+                    <li>Accessibility</li>
+                    <li>Careers</li>
+                    <li>Ad Choices</li>
+                    <li>Mobile</li>
+                    <li>Shoping Malls</li>
+                    <li>Show Rooms</li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <ul>
+                    <li>Talent Soliutions</li>
+                    <li>Advertising</li>
+                    <li>Marketing Solutions</li>
+                    <li>Small Business</li>
+                    <li>Retail Shops</li>
+                    <li>Delivery Solutions</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 contacts">
+                <br>
+            <a href="#"><i class="fa fa-instagram" style="font-size:35px"></i></a>
+            <a href="#"><i class="fa fa-twitter" style="font-size:35px"></i></a>
+            <a href="#"><i class="fa fa-facebook"style="font-size:35px"></i></a>
+            <a href="#"><i class="fa fa-youtube"style="font-size:35px"></i></a>
+            <a href="#"><i class="fa fa-github"style="font-size:35px"></i></a>
+            </div>
+            <div class="form-group col-md-4">
+                <br>
+                <p>Subsribe to get our monthly news letters</p>
+                <input type="email" name="email"class="email" placeholder="email">
+                <input type="submit" name="sub" class="btn btn-success">
+            </div>
+        <p>&copyAll rights Reserved,2020 @ <span>Origin Products</span></p>
+    </div>
+</footer>
+<!-- footer end -->
+
+<!-- AOS loading -->
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+    AOS.init();
+    //loader declaration
+onload = () => {
+        document.getElementById("loader").style.display = "none";
+        document.querySelector(".home").style.display = "block";
+        document.querySelector(".header").style.display ="block";
+        document.getElementById("footer").style.display = "block";
+    }
+    </script>
+    <script src="{% static "js/cart.js"%}"></script>
+</body>
+</html>

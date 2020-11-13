@@ -1,0 +1,125 @@
+
+{% extends "base_app/base.html" %}
+{% load static %}
+{%block body%}
+<style type="text/css">
+body{
+/*background:linear-gradient(To right,#232b2e,#603594);*/
+background: rgb(89,92,92);
+background: linear-gradient(52deg, rgba(89,92,92,0.6199522045146184) 0%, rgba(78,81,80,1) 0%, rgba(42,51,42,1) 62%, rgba(22,21,20,1) 93%);
+}
+.login{
+    margin-top: 25vh;
+    margin-bottom:100px;
+}
+.details{
+    width:320px;
+    padding:30px;
+    background:rgba(0,0,0,.5);
+    display:flex;
+    align-content:center;
+    flex-direction:column;
+    justify-content:space-around;
+    border-radius:20px;
+    margin:auto;
+    box-shadow:2px 5px 10px rgba(0,0,0,0.5),-6px -10px 15px rgba(0,0,0,0.2);
+}
+.login input{
+    outline:none;
+    border:2px solid #d60027;
+    color:#fff;
+    border-radius:5px;
+    font-size:18px;
+    padding:10px;
+    position:relative;
+    margin:10px auto;
+    background: transparent;
+}
+.login a{
+    text-decoration:none;
+    color:inherit;
+    outline:none;
+    text-align:center;
+}
+#btn{
+    width:200px;
+    padding:10px 0;
+    border:transparent;
+    border-radius:10px;
+    /*background-color:#e8549b;*/
+    background:linear-gradient(to right,red,orange);
+    align-self:center;
+    margin-top: 15px;
+    color:#000000;
+    font-weight: bolder;
+}
+form::before{
+    content:'';
+    position:fixed;
+    left:-10px;
+    top:30px;
+    height:150px;
+    width:150px;
+    border-radius:50%;
+    background-color:orange;
+    box-shadow:2px 5px 10 rgba(0,0,0,0.1),-2px -5px 20px rgba(0,0,0,0.2);
+    z-index:-1;
+    animation:bubble 5s 3s infinite linear;
+}
+.details::before{
+    content:'';
+    position:fixed;
+    right:50px;
+    top:100px;
+    height:100px;
+    width:100px;
+    border-radius:50%;
+    background-color:#c2c2c2;
+    box-shadow:2px 5px 10 rgba(0,0,0,0.1),-2px -5px 20px rgba(0,0,0,0.2);
+    z-index:-1;
+    animation:bubble 6s 1s infinite linear;
+}
+form::after{
+    content:'';
+    position:fixed;
+    right:-5vw;
+    top:45vh;
+    height:300px;
+    width:300px;
+    border-radius:50%;
+    background-color:#1df2d2;
+    opacity:;
+    box-shadow: 2px 5px 10px rgba(0,0,0,0.4),-2px -5px 20px rgba(0,0,0,0.5);
+    z-index:-1;
+    animation:bubble 8s 2s infinite linear reverse;
+}
+@keyframes bubble{
+    0%{transform:translate(0,0);}
+    50%{transform:translate(25px,20px);}
+}
+.login span{
+    color:#fff;
+    align-self:center;
+}
+.login p{
+    color: #fff;
+    text-align: center;
+}
+</style>
+
+<form method="POST" action="">
+       {% csrf_token %}
+	<div class="login">
+            <div class="details">
+                <input type="username" name="username" placeholder="Username" class="form-control" required>
+                <input type="password" name="password" placeholder="Password" class="form-control" required>
+                <input id="btn" type="submit" value="Login">
+                {% for msg in messages %}
+                <p>{{msg}}</p>
+                {% endfor %}
+                <span>Don't have an account ?</span>
+                <a href="{% url "signup"%}" id="btn">Signup</a>
+            </div>
+        </div>
+</form>
+{% endblock %}

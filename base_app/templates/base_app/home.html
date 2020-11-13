@@ -1,0 +1,46 @@
+
+{% extends "base_app/base.html" %}
+{% load static %}
+{% block body %}
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static "css/base_app/home.css" %}">
+</head>
+<div class="home" id="home">
+	<div class="frame">
+    	<h1><span>Grab</span><span>Everything</span><span>You</span><span>Like</span></h1>
+    	
+    </div>
+    <p id="points">Featured Categories</p>
+    <div class="categories">
+        <a href="{% url "MenFashion"%}">
+        <div class="men style">
+            <img src="https://images.pexels.com/photos/1964970/pexels-photo-1964970.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="men fashion">
+            <h3>Men's Fashion</h3>
+            <p>Starting at ₹1,000</p>
+        </div>
+        </a>
+        <a href="{% url "WomenFashion"%}">
+        <div class="women style">
+            <img src="https://images.pexels.com/photos/2787341/pexels-photo-2787341.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="women fashion">
+            <h3>Women's Fashion</h3>
+            <p>Starting at ₹1,000</p>
+        </div>
+        </a>
+        <div class="kids style">
+            <img src="https://images.pexels.com/photos/969373/pexels-photo-969373.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="kid's fashion">
+            <h3>Kid's Fashion</h3>
+            <p>Starting at ₹1,500</p>
+        </div>
+        <div class="watches style">
+            <img src="https://images.pexels.com/photos/2155319/pexels-photo-2155319.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="watches">
+            <h3>Watches</h3>
+            <p>Starting at ₹2,000</p>
+        </div>
+        <div class="shoes style">
+            <img src="https://images.pexels.com/photos/1159670/pexels-photo-1159670.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
+            <h3>Shoes</h3>
+            <p>Starting at ₹2,000</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

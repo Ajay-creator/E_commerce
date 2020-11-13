@@ -1,0 +1,200 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Jockey+One&family=Playfair+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+/* header and menu*/
+body{
+    /*background:linear-gradient(to right,#232b2e,#7b14b3);*/
+    background: rgb(89,92,92);
+    background: linear-gradient(52deg, rgba(89,92,92,0.6199522045146184) 0%, rgba(78,81,80,1) 0%, rgba(42,51,42,1) 62%, rgba(22,21,20,1) 93%);
+
+}
+.header{
+    left:0;
+    top:0;
+    position:fixed;
+    padding:10px 15px;
+    height:60px;
+    width:100%; 
+    z-index:3000;
+    text-align:center;
+    color: #ffffff;
+}
+.header.background{
+    background:linear-gradient(to right,#ff0022,#f77300);
+}
+.header span{
+    font-size:30px;
+    font-family:"Pacifico",cursive;
+    color:#fff;
+    font-weight:bolder;
+    text-shadow:2px 2px 4px rgba(0,0,0,0.5),-2px -2px 4px rgba(0,0,0,0.2);
+}
+#menu-bar{
+    visibility:visible;
+    float:left;
+    cursor:pointer;
+}
+#cart{
+    float:right;
+    position:fixed;
+    right:35px;
+    font-size:35px;
+    color:#000000;
+    cursor: pointer;
+    color: #ffffff;
+}
+.header p{
+    background:#d1003b;
+    color:#fff;
+    border-radius:50%;
+    padding:3px;
+    height:30px;
+    width:30px; 
+    text-align: center;
+    position:fixed;
+    right:10px;
+    top:5px;
+    z-index:1000;
+
+}
+#close{
+visibility:hidden;
+position:relative;
+right:20px;
+top:20px;
+color:#fff;
+font-size:35px;
+position:absolute;
+overflow-y:auto;
+cursor: pointer;
+}
+.active #close{
+    visibility:visible;
+}
+.menu ul{
+    margin:0;
+    padding:0;
+    left:0;
+    top:0;
+    height:100%;
+    width:75vw;
+    background:#000000;
+    visibility:hidden;
+    position:fixed;
+    overflow-y:auto;
+    z-index:3000;
+    font-family:"Playfair Display",serif;
+}
+.active ul{
+    visibility:visible;
+}
+.menu li{
+    list-style-type:none;
+    padding:10px 0;
+    position:relative;
+}
+.menu ul li:first-child{
+    padding-top:30vw;
+}
+.menu a{
+    text-decoration:none;
+    display:block;
+    padding:20px 50px;
+    color:#fff;
+    outline:none;
+    position:relative ;
+    cursor:pointer;
+    z-index:3000;
+}
+.menu a::before{
+    content:'';
+    left:30px;
+    top:8px;
+    height:50px;
+    width:5px;
+    background:linear-gradient(to right,#ff0022,#f77300);
+    position:absolute;
+    border-radius:2px;
+    transition:all .5s;
+    z-index:-1;
+}
+.menu a:hover::before{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    border-radius:0 30px 30px 30px;
+}
+
+@media only screen and (min-width: 768px) {
+  /* For other than mobile phones: */
+  .menu ul {
+    width: 25vw;
+    height: 100%;
+  }
+  .menu ul li:first-child{
+    padding-top:10vw;
+}
+}
+
+/* end of header */
+
+/*start of footer */
+footer{
+    background-color:#000;
+    color:#c2c2c2;
+    padding-top:50px;
+    padding-bottom: 50px;
+    font-family:"Playfair Display",serif;
+    position: relative; 
+}
+.contacts a{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    float:left;
+    margin-left:15px;
+    height:60px;
+    width:60px;
+    text-decoration:none;
+    color:#c2c2c2;
+    position:relative;
+    border-radius:50%;
+    z-index:1000;
+}
+.contacts a::before{
+    content:'';
+    height:0;
+    width:0;
+    left:50px;
+    top:50px;
+    position:absolute;
+    background:-webkit-linear-gradient(45deg,orange,red);
+    transition: all .75s;
+    z-index:-1000;
+}
+.contacts a:hover::before{
+    left:0;
+    top:0;
+    width:100%;
+    height: 100%;
+    border-radius:50%;
+}
+.contacts a:hover{
+    color:#fff;
+}
+footer li{
+    list-style-type: none;
+    cursor: pointer;
+    padding-top:5px;
+}
+footer li:hover{
+    color: #fff;
+}
+footer p span{
+    color:#fff;
+    font-size:25px;
+    font-family:'Pacifico',cursive;
+}
+/* end of footer */

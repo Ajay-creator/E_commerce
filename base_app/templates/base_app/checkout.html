@@ -1,0 +1,106 @@
+{% extends "base_app/base.html"%}
+{% load static %}
+{% block body %}
+
+<style type="text/css">
+	.container{
+		margin:80px auto;
+	}
+	.address,.total{
+		margin:20px;
+		padding:30px;
+		background: transparent;
+		/*background: linear-gradient(45deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);*/
+		box-shadow:2px 5px 10px rgba(0,0,0,0.5),-6px -10px 15px rgba(0,0,0,0.2);
+		border-radius:10px;
+	}
+	.address{
+		max-height:400px;
+	}
+	.address input{
+		padding:5px;
+		margin:15px auto;
+		border-radius:5px;
+		border:2px solid #d60027;
+		outline:none;
+		background:transparent;
+	}
+	.total p{
+		color:#ffffff;
+		font-size:20px;
+		font-weight:bold;
+		font-family:arial;
+	}
+	.address h4{
+		color:#fff;
+		padding:10px auto;
+	}
+	.total a{
+		text-decoration:none;
+		outline:none;
+		text-align:center;
+		padding:10px; 
+		border-radius:10px;
+		background:linear-gradient(to right,#ff0022,#f77300);
+		font-weight: bold;
+		margin:10px auto; 
+		color: #000;
+		font-family:arial;
+	}
+	.total img{
+		padding:5px;
+		margin:10px 5px; 
+		border-radius:2px;
+		box-shadow:2px 4px 8px rgba(0,0,0,0.2),-2px -4px 16px rgba(0,0,0,0.2);
+	}
+	.address button{
+		padding:10px;
+		text-align: center;
+		width:200px;
+		background:linear-gradient(to right,#ff0022,#f77300);
+		border-radius:10px;
+		color:#000;
+		font-family:arial;
+		font-weight:bold;
+		outline:none;
+		border:none;
+	}
+</style>
+
+<div class="container">	
+	<div class="row">
+		<div class="col-md-5 total">
+			<a href="{% url "my_cart"%}">Back to Cart</a><br>
+			{% for item in items %}
+			<img src="{{item.product.image}}" height="150px" width="100px">
+			{% endfor%}
+			<hr width="100%" color="#C2C2C2">
+			<p>Total no. of items : {{order.get_cart_items}}</p>
+			<p>Total Payable : $ {{order.get_cart_total|floatformat:2}}</p>
+		</div>
+		<div class="col-md-5 address">
+			<form method="POST" action="">
+				{% csrf_token %}
+				<h4>Shipping Information</h4>
+				{{ form.address }}
+				{{ form.city }}
+				{{ form.state }}
+				{{ form.pincode }}
+				<button>Continue</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	var input_fields = document.getElementsByTagName("input")
+	for(i=0;i<input_fields.length;i++){
+		input_fields[i].classList.add("form-control");
+	}
+	input_fields[1].placeholder = "Address";
+	input_fields[2].placeholder = "City";
+	input_fields[3].placeholder = "State";
+	input_fields[4].placeholder = "Pincode";	
+</script>
+{% endblock %}

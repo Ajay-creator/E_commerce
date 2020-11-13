@@ -1,0 +1,21 @@
+{% extends "base_app/base.html" %}
+{% load static %}
+{% block body %}
+
+<head><link rel="stylesheet" type="text/css" href="{%static "css/base_app/categories.css"%}"></head>
+
+<h3>Womens Fashion</h3>
+<div class="container category">
+	{% for pro in products %}
+		<div class="product">
+		<h4>{{pro.product_name}}</h4>
+
+		<img src="{{pro.image}}"/>
+
+		<span>$ {{pro.price}}</span>
+		<p>{{ pro.description }}</p>
+		<a href="#" id="btn">Buy Now</a>
+		</div>
+	{% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,194 @@
+{% extends "base_app/base.html" %}
+{% load static %}
+{% block body %}
+
+<style type="text/css">
+	.cart{
+		position:relative;
+		margin-top: 80px;
+		margin-bottom:30px;
+		margin-left:10px;
+		margin-right:10px;
+		font-family: 'Playfair Display', serif;
+
+	}
+	.cart-item{
+		color:#ffffff;
+		text-align: center;
+		padding:20px;
+		margin: 10px auto;
+		border-radius:2px;
+		box-shadow: 2px 4px 8px rgba(0,0,0,0.3),-2px -4px 16px rgba(0,0,0,0.2);
+		/*background:linear-gradient(45deg,#658deb,#67c5eb,#63e3e6);*/
+		background: transparent;
+		z-index:1000;
+	}
+	.cart-item p{
+		display:flex;
+		flex-direction:row;
+		flex-wrap:wrap;
+		justify-content:space-around;
+		align-content:center;
+	}
+	.cart-item p:nth-child(2){
+		padding-top:0;
+		font-size:25px;
+		background:#de3907;
+		border-radius:
+		height:30px;
+		width:40px;
+		border-radius:5px;
+		box-shadow:2px 2px 5px rgba(0,0,0,0.4);
+	}
+	.quantity{
+		display: flex;
+		flex-direction:row;
+		justify-content: center;
+		text-align:center;
+		/*padding-top:60px */
+	}
+	.cart-item img{
+		margin:10px;
+		box-shadow:3px 3px 8px rgba(0,0,0,0.2),-3px -3px 10px rgba(0,0,0,0.3); 
+		border-radius:2px;
+	}
+	i{
+		padding-left:10px;
+		padding-right:10px;
+		cursor: pointer;
+	}
+
+	.check-out a,.back a{
+		padding:10px;
+		width:200px;
+		background:linear-gradient(to right,#ff0022,#f77300);
+		color: #000000;
+		font-weight:bold;
+		border-radius:10px;
+		text-decoration: none;
+		margin-top:15px;
+		z-index:1000;
+		font-weight:bold;
+		text-align: center;
+		font-size:18px;
+		font-family:arial;
+	}
+	
+	.check-out p,.back p{
+		font-size:22px;
+		font-family: 'Playfair Display', serif;
+		color:#ffffff
+	}
+
+	.box{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    position:relative ;
+    margin:25px 20px;
+    border-radius:10px;
+    height:300px;
+    padding:50px;
+    transition:all .5s;
+    background:transparent;
+    box-shadow:2px 5px 10px rgba(0,0,0,0.5),-6px -10px 15px rgba(0,0,0,0.2);
+
+	}
+	.box::before{
+	    content:'';
+	    left:30px;
+	    top:60px;
+	    height:200px;
+	    width:5px;
+	    border-radius:2px;
+	    background:linear-gradient(45deg,#f551be,#3a68f2);
+	    position:absolute;
+	    transition:all .5s;
+	}
+	.box:last-child::before{
+	    background:linear-gradient(45deg,#916ded,#43cde8,#46e8bf);
+	}
+	.box:hover{
+	    color:#000;
+	}
+	.box:hover::before{
+	    left:0;
+	    top:0;
+	    height:100%;
+	    width:100%;
+	    border-radius:10px;
+	}
+	.box p,h1{
+	    z-index:1000;
+	}
+	h3{
+		font-weight:bolder;
+		color: #d60027; 
+	}
+	h3::after{
+	content:'';
+	left:-10px;
+	top:40px;
+	width:120px;
+	height:5px;
+	position: absolute;
+	background:linear-gradient(45deg,red,orange); 
+	border-radius:10px;
+	}
+
+	@media screen only and(max-width:768px){
+		.cart-item p{
+			padding:10px;
+
+		}
+	}
+</style>
+
+<div class="container">
+<div class="cart">
+	<h3>My Cart</h3>
+	<div class=" row">
+		<div class="col-md-5 check-out box">
+			<p>Total Items : {{order.get_cart_items}}</p>
+			<p>Total Amount : $ {{order.get_cart_total|floatformat:2}}</p>
+			<hr width="90%" height="2px" color="#C2C2C2">
+			{%if order.get_cart_items %}
+			<a href="{% url "checkout"%}">Checkout</a>
+			{% endif %}
+		</div>
+		<div class="col-md-5 back box">
+			<p>{{msg}}</p>
+			<hr width="100%" height="2px" color="#C2C2C2">
+			{% if request.user.is_authenticated %}
+			<a href="{% url "home"%}">Continue Shopping</a>
+			{% else %}
+			<a href="{% url "login"%}">Login</a>
+			{% endif %}
+		</div>
+	</div>
+	{% for item in items %}
+	<div class="row cart-item">
+		<hr width="100%" color="#C2C2C2">
+		<div class="col-md-3">
+			<img src="{{item.product.image}}" height="150px" width="100px" alt="image">
+		</div>
+		<div class="col-md-3">
+			<p>{{item.product.product_name}}</p>
+		</div>
+		<div class="col-md-3">
+			<div class="quantity">
+				<i data-product={{item.product.id}} data-action="remove" class="fa fa-angle-down update-cart" style="font-size:30px;"></i>
+				<p>{{item.quantity}}</p>
+				<i data-product={{item.product.id}} data-action="add" class="fa fa-angle-up update-cart" style="font-size:30px;"></i>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<p>{{item.get_total|floatformat:2}}</p>
+		</div>
+		<hr width="100%" color="#C2C2C2">
+	</div>
+	{% endfor %}
+</div>
+</div>
+{% endblock %}
