@@ -23,9 +23,9 @@ TEMPLATE_DIR = Path(BASE_DIR / 'base_app/templates')
 SECRET_KEY = '&rg21z@if3!g-qghf5u8*2z07zrlwd16b%pns-++=z0d$t@!1q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1","origin-products.herokuapp.com"]
 
 
 # Application definition
