@@ -43,7 +43,6 @@ def SignupPage(request):
 
 				if form.is_valid():
 					user = form.save()
-
 					customer=Customer.objects.create(user=user)
 					username = form.cleaned_data.get("username")
 					messages.success(request,"Account has been successfully created for "+username)
@@ -52,15 +51,8 @@ def SignupPage(request):
 				else:
 					messages.error(request,"Password must be atleast 8 characters long and should cantain letters, numbers and speacial characters")
 
-	if request.user.is_authenticated:
-		customer = request.user.customer
-		order,created = Order.objects.get_or_create(customer=customer,complete=False)
-		cartItems = order.get_cart_items
 
-	else:
-		cartItems = 0
-
-	context = {"cartItems":cartItems,"form":form}
+	context = {"form":form}
 	return render(request,"base_app/signup.html",context)
 
 def LoginPage(request):
@@ -154,7 +146,7 @@ def Cart(request):
 	else:
 		items=[]
 		order = {"get_cart_total":0,"get_cart_items":0}
-		msg = "Please login to fill your cart.😀"
+		msg = "Please login to fill your cart.😵"
 
 	if request.user.is_authenticated:
 		customer = request.user.customer
